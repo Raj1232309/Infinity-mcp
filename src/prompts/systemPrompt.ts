@@ -118,10 +118,10 @@ Examples:
 
 Website work may require:
 
-* design (always use open-design for design foundation and follow the "frontend_design" prompt guidelines)
+* design (always use open-design for the design foundation and strictly adhere to the "frontend_design" agent prompt guidelines)
 * architecture
 * performance
-* animation (always use animotion-mcp for adding different animations)
+* animation (always make sure to add all types of animations—such as entrance, exit, scroll-triggered, hover, and ambient micro-animations—to all components using animotion-mcp and other animation skills)
 * content
 * accessibility
 * optimization

@@ -1,6 +1,6 @@
 ---
 name: universal-frontend-orchestrator
-description: Orchestrates all frontend, UI, design engineering, and animation capabilities (gsap, shadcn, threejs, VengenceUI, aceternity-ui, etc.) to build premium, slop-free websites.
+description: Orchestrates all frontend, UI, design engineering, and animation capabilities (gsap, shadcn, threejs, VengenceUI, aceternity-ui, magicui, etc.) to build premium, slop-free websites.
 ---
 
 # Universal Frontend & UI Orchestrator Skill
@@ -32,6 +32,7 @@ graph TD
     D --> D1[shadcn / 21st.dev / react-bits]
     D --> D2[VengenceUI]
     D --> D3[aceternity-ui]
+    D --> D4[magicui]
     E --> E1[gsap-core / gsap-scrolltrigger / animotion-mcp]
     E --> E2[threejs-animation]
     E --> E3[morphing-icons]
@@ -42,12 +43,12 @@ graph TD
 ## 🛠️ Step-by-Step Orchestration Guide
 
 ### Step 1: Initialize the Design System & Foundation
-1. **Load Capabilities**: `open-design`, `frontend-design`, `taste-skill`, `impeccable`, `emil-design-eng`.
+1. **Load Capabilities**: `open-design` (always use open-design for the design foundation), `frontend-design` (strictly adhere to these agent prompt guidelines), `taste-skill`, `impeccable`, `emil-design-eng`.
 2. **Setup Variables**: Initialize `index.css` with HSL variables (supporting light/dark mode, semantic tokens, and smooth transitions).
 3. **Typography & Layout**: Standardize spacing and typographic scale.
 
 ### Step 2: Assemble Components & Layout
-1. **Load Capabilities**: `shadcn`, `21st.dev`, `aceternity-ui`, `VengenceUI`, `react-bits`.
+1. **Load Capabilities**: `shadcn`, `21st.dev`, `aceternity-ui`, `VengenceUI`, `react-bits`, `magicui`.
 2. **Build Layout**: Assemble using semantic HTML5 tags (`<main>`, `<section>`, `<nav>`, `<footer>`).
 3. **Premium Details**: Implement interactive UI cards with glassmorphism, card border gradients, and hover effects.
 
@@ -56,6 +57,7 @@ graph TD
 2. **Entrance Animations**: Use GSAP to animate hero elements on load with staggers.
 3. **Scroll Animations**: Bind layouts to `ScrollTrigger` for smooth parallax, scroll-reveals, and pinned sections.
 4. **Micro-interactions**: Use `morphing-icons` for state transitions (e.g., play/pause, menu open/close).
+5. **Animation Coverage**: Ensure all components feature appropriate transitions and animations (such as entrance, exit, scroll-triggered reveals, interactive hover/active states, and ambient micro-animations) to feel modern, cohesive, and dynamic.
 
 ---
 
