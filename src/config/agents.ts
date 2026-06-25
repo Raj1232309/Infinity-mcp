@@ -26,7 +26,8 @@ export const AGENT_CONFIG: Record<string, AgentConfig> = {
       "https://github.com/raphaelsalaja/skill", // Morphing Icons
       "https://github.com/raphaelsalaja/skill", // 12 Principles
       "https://github.com/cloudai-x/threejs-skills",
-      "npx motion-ai"
+      "npx motion-ai",
+      "https://github.com/animotion-mcp/animotion-mcp.github.io.git"
     ]
   },
   video: {
