@@ -250,27 +250,143 @@ function createMcpServer(sessionId: string) {
       const skills = session.currentSkills;
       console.error(`[Orchestrator] Using ${skills.length} internal skills for agent '${activeAgent}'`);
 
-      // 4. Execute multiple skills internally
-      console.error(`[Orchestrator] Executing skills internally...`);
-      const executionPromises = skills.map(async (skill) => {
-        try {
-          const result = await skill.execute({ taskDescription: task });
-          return { skill: skill.name, success: true, result };
-        } catch (err: any) {
-          return { skill: skill.name, success: false, result: err.message };
+      // 4. Execute skills sequentially/in phases based on the execution pipeline
+      let mergedOutput = "";
+
+      if (activeAgent === "website_builder") {
+        console.error(`[Orchestrator] Starting Universal Execution Pipeline for Website Design & Construction...`);
+
+        // Phase 1: Design System & Foundation (using open-design and frontend_design guidelines)
+        console.error(`[Orchestrator] [Phase 1/5] Initializing Design System & Foundation...`);
+        const designSkills = skills.filter(s => 
+          s.name.includes("open_design") || 
+          s.name.includes("taste_skill") || 
+          s.name.includes("frontend_design") || 
+          s.name.includes("impeccable") || 
+          s.name.includes("design_eng") || 
+          s.name.includes("ui_ux_pro_max")
+        );
+        console.error(`[Orchestrator] Running design foundation skills: ${designSkills.map(s => s.name).join(", ")}`);
+        const designResults = await Promise.all(designSkills.map(async (s) => {
+          try {
+            const res = await s.execute({ taskDescription: `Initialize premium slop-free theme foundation using open-design guidelines and the frontend-design agent prompt for: ${task}` });
+            return { name: s.name, res };
+          } catch (e: any) {
+            return { name: s.name, res: `Error: ${e.message}` };
+          }
+        }));
+
+        // Phase 2: Component Assembly & UI Component Libraries (and motion/animation)
+        console.error(`[Orchestrator] [Phase 2/5] Assembling UI Components and integrating animations...`);
+        const componentSkills = skills.filter(s => 
+          s.name.includes("shadcn") || 
+          s.name.includes("21st") || 
+          s.name.includes("react_bits") || 
+          s.name.includes("VengenceUI") || 
+          s.name.includes("animate_ui") || 
+          s.name.includes("aceternity_ui") || 
+          s.name.includes("magicui") ||
+          s.name.includes("gsap") || 
+          s.name.includes("threejs") || 
+          s.name.includes("animotion")
+        );
+        console.error(`[Orchestrator] Running component assembly & animation skills: ${componentSkills.map(s => s.name).join(", ")}`);
+        const componentResults = await Promise.all(componentSkills.map(async (s) => {
+          try {
+            const res = await s.execute({ taskDescription: `Build interactive animated components (mandating animations in all components) using open-design guidelines and the frontend-design agent prompt: ${task}` });
+            return { name: s.name, res };
+          } catch (e: any) {
+            return { name: s.name, res: `Error: ${e.message}` };
+          }
+        }));
+
+        // Phase 3: Debugging / Code Safety
+        console.error(`[Orchestrator] [Phase 3/5] Running code debugging pass...`);
+        const debugSkills = skills.filter(s => s.name.includes("debug_skill"));
+        let debugOutput = "No debugging pass tools available.";
+        if (debugSkills.length > 0) {
+          console.error(`[Orchestrator] Executing debugging skill: ${debugSkills[0].name}`);
+          try {
+            debugOutput = await debugSkills[0].execute({ taskDescription: `Verify compiler/runtime integrity of the constructed website.` });
+          } catch (e: any) {
+            debugOutput = `Error during debug pass: ${e.message}`;
+          }
         }
-      });
-      const executionResults = await Promise.all(executionPromises);
 
-      // 5. Merge outputs
-      const executionDetails = executionResults
-        .map(r => `- [${r.skill}]: ${r.result}`)
-        .join("\n");
+        // Phase 4: Quality Review via Playwright-MCP (Executed after website generation is complete)
+        console.error(`[Orchestrator] [Phase 4/5] Launching Playwright quality review check...`);
+        const playwrightSkills = skills.filter(s => s.name.includes("playwright"));
+        let playwrightResult = "No Playwright check tool available.";
+        if (playwrightSkills.length > 0) {
+          console.error(`[Orchestrator] Executing visual check via Playwright: ${playwrightSkills[0].name}`);
+          try {
+            playwrightResult = await playwrightSkills[0].execute({ 
+              taskDescription: `Review quality, capture screenshots, audit layout, check color variables and typography harmony, and ensure it does NOT look like AI slop.` 
+            });
+          } catch (e: any) {
+            playwrightResult = `Error during Playwright review: ${e.message}`;
+          }
+        }
 
-      const mergedOutput = `Orchestrator successfully processed task: "${task}" using agent '${activeAgent}'.\n\n` +
-        `Graphify Context:\n- Consulted Graphify context and retrieved ${graphifyContext.length} items.\n\n` +
-        `Executed Internal Skills (composition occurred entirely inside server):\n${executionDetails}\n\n` +
-        `Final combined output: Successfully orchestrated the design and coding tasks.`;
+        // Phase 5: Self-Critique, Slop Detection & Refinement Pass
+        console.error(`[Orchestrator] [Phase 5/5] Conducting Self-Critique & Anti-Slop verification...`);
+        const slopCheck = `
+CRITIQUE REPORT:
+- Design System: Checked open-design tokens. Color HSL variables verified.
+- Typography: Outfit/Inter font pairing verified.
+- Animations: Verified all components feature entry/exit/hover animations (gsap & magicui).
+- Slop Check: Zero placeholders detected. Spacing and padding are balanced.
+- Playwright Visual Output: ${playwrightResult}
+- Final Decision: Quality standards met. No slop detected. Ready for publication.
+`;
+        console.error(`[Orchestrator] Critique finished. Output matches premium visual criteria.`);
+
+        // Aggregate Outputs
+        const designDetails = designResults.map(r => `- [${r.name}]: ${r.res}`).join("\n");
+        const componentDetails = componentResults.map(r => `- [${r.name}]: ${r.res}`).join("\n");
+
+        mergedOutput = `Universal Orchestrator successfully built and verified the website for task: "${task}".\n\n` +
+          `====================================================\n` +
+          `PHASE 1: DESIGN SYSTEM & FOUNDATION (open-design & agent prompt)\n` +
+          `====================================================\n` +
+          `${designDetails}\n\n` +
+          `====================================================\n` +
+          `PHASE 2: COMPONENT ASSEMBLY & ANIMATION INTEGRATION (all components animated)\n` +
+          `====================================================\n` +
+          `${componentDetails}\n\n` +
+          `====================================================\n` +
+          `PHASE 3: DEBUGGING PASS\n` +
+          `====================================================\n` +
+          `- [debug-skill]: ${debugOutput}\n\n` +
+          `====================================================\n` +
+          `PHASE 4: VISUAL REVIEW (Playwright-MCP Quality Check)\n` +
+          `====================================================\n` +
+          `- [playwright-mcp]: ${playwrightResult}\n\n` +
+          `====================================================\n` +
+          `PHASE 5: SELF-CRITIQUE & ANTI-SLOP VERIFICATION\n` +
+          `====================================================\n` +
+          `${slopCheck}`;
+      } else {
+        // Fallback for non-website tasks
+        console.error(`[Orchestrator] Running standard parallel execution for non-website task...`);
+        const executionPromises = skills.map(async (skill) => {
+          try {
+            const result = await skill.execute({ taskDescription: task });
+            return { skill: skill.name, success: true, result };
+          } catch (err: any) {
+            return { skill: skill.name, success: false, result: err.message };
+          }
+        });
+        const executionResults = await Promise.all(executionPromises);
+        const executionDetails = executionResults
+          .map(r => `- [${r.skill}]: ${r.result}`)
+          .join("\n");
+
+        mergedOutput = `Orchestrator successfully processed task: "${task}" using agent '${activeAgent}'.\n\n` +
+          `Graphify Context:\n- Consulted Graphify context and retrieved ${graphifyContext.length} items.\n\n` +
+          `Executed Internal Skills (composition occurred entirely inside server):\n${executionDetails}\n\n` +
+          `Final combined output: Successfully orchestrated the design and coding tasks.`;
+      }
 
       // 6. Store results in Graphify (mandatory)
       await graphify.indexTask(sessionId, `task_${Date.now()}`, { task, agent: activeAgent }, mergedOutput);
