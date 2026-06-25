@@ -15,7 +15,7 @@ Typography carries the personality of the page. Pair the display and body faces 
 
 Structure is information. Structural devices, numbering, eyebrows, dividers, labels, should encode something true about the content, not decorate it. Many generic designs use numbered markers (01 / 02 / 03), but that's only appropriate if the content actually is a sequence - like a real process or a typed timeline where order carries information the reader needs. Question if choices like numbered markers actually make sense before incorporating them.
 
-Animate all components. Always ensure every component includes transitions and animations (such as entrance, exit, scroll-triggered reveal, interactive hover/active states, and ambient micro-animations). Use open-design to initialize and structure the entire design system and layout foundation.
+Animate all components. Always ensure every component includes transitions and animations (such as entrance, exit, scroll-triggered reveal, interactive hover/active states, and ambient micro-animations). Use open-design to initialize and structure the entire design system and layout foundation, and use taste-skill for color palette selection and aesthetic taste.
 
 Match complexity to the vision. Maximalist directions need elaborate execution; minimal directions need precision in spacing, type, and detail. Elegance is executing the chosen vision well.
 

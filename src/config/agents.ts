@@ -10,7 +10,7 @@ export const AGENT_CONFIG: Record<string, AgentConfig> = {
       "https://github.com/AlmogBaku/debug-skill.git",
       "https://github.com/AnmolSaini16/mapcn.git",
       "npx skills add https://github.com/Dammyjay93/interface-design",
-      "npx skills add https://github.com/Leonxlnx/taste-skill",
+      "https://github.com/Leonxlnx/taste-skill.git",
       "npx skills add https://github.com/anthropics/skills --skill frontend-design",
       "npx skills add https://github.com/anthropics/skills --skill canvas-design",
       "npx skills add https://github.com/0xdesign/design-plugin",

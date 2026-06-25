@@ -43,7 +43,7 @@ graph TD
 ## 🛠️ Step-by-Step Orchestration Guide
 
 ### Step 1: Initialize the Design System & Foundation
-1. **Load Capabilities**: `open-design` (always use open-design for the design foundation), `frontend-design` (strictly adhere to these agent prompt guidelines), `taste-skill`, `impeccable`, `emil-design-eng`.
+1. **Load Capabilities**: `open-design` (always use open-design for the design foundation), `frontend-design` (strictly adhere to these agent prompt guidelines), `taste-skill` (always use taste-skill for color selection and aesthetic taste), `impeccable`, `emil-design-eng`.
 2. **Setup Variables**: Initialize `index.css` with HSL variables (supporting light/dark mode, semantic tokens, and smooth transitions).
 3. **Typography & Layout**: Standardize spacing and typographic scale.
 

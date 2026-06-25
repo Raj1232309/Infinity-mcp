@@ -118,7 +118,7 @@ Examples:
 
 Website work may require:
 
-* design (always use open-design for the design foundation and strictly adhere to the "frontend_design" agent prompt guidelines)
+* design (always use open-design for the design foundation, strictly adhere to the "frontend_design" agent prompt guidelines, and use taste-skill for color selection and aesthetic taste)
 * architecture
 * performance
 * animation (always make sure to add all types of animations—such as entrance, exit, scroll-triggered, hover, and ambient micro-animations—to all components using animotion-mcp and other animation skills)
